@@ -9,6 +9,10 @@
     {name: 'Lera Nedialkova', email: 'lera.nedialkova@email.com'},
   ]
 
+  let snowman = '&#9731;'
+  let uncheckedBox = '&#9744;'
+  let checkedBox = '&#9745;'
+
   function selectUser(user) {
     users[users.findIndex(u => u.name === user.name)] = {
       ...user,
@@ -36,7 +40,7 @@
     background-color: yellow;
   }
 
-  .icon {
+  .icon, .template-icon {
     display: flex;
     justify-content: center;
   }
@@ -57,10 +61,36 @@
 
 <h1>Complex Multi-Select</h1>
 
-<table cellspacing=0 class:hasSelection={hasSelection} class="selectable">
+<h2>(css managing presentation)</h2>
+
+<table cellspacing=0 class:hasSelection={hasSelection} class=selectable>
   {#each users as user}
   <tr class:selected={user.selected} on:click={() => selectUser(user)}>
-    <td class="icon" height="20" width="20"></td>
+    <td class=icon height=20 width=20></td>
+    <td>
+      {user.name}
+    </td>
+    <td>
+      {user.email}
+    </td>
+  </tr>
+  {/each}
+</table>
+
+<h2>(template managing presentation)</h2>
+
+<table cellspacing=0 class:hasSelection={hasSelection} class=selectable>
+  {#each users as user}
+  <tr on:click={() => selectUser(user)}>
+    <td class=template-icon height=20 width=20>
+      {#if user.selected && hasSelection}
+        {@html checkedBox}
+      {:else if !user.selected && hasSelection}
+        {@html uncheckedBox}
+      {:else}
+        {@html snowman}
+      {/if}
+    </td>
     <td>
       {user.name}
     </td>
