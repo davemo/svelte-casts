@@ -41,7 +41,7 @@
 
 <table cellspacing=0 class:hasSelection={hasSelection} class=selectable>
   {#each $collection as item}
-    <tr class:selected={item.selected} on:click={() => collection.select(item)}>
+    <tr class:selected={item.selected} on:click={() => collection.selectItem(item)}>
       <td class=icon height=20 width=20></td>
       <td>
         {item.name}
