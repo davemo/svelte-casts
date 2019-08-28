@@ -1,21 +1,7 @@
 <script>
    export let collection;
 
-   let collection_copy;
-
-   collection.subscribe(c => {
-     collection_copy = c
-   })
-
-   const select = function(item) {
-     collection_copy[collection_copy.findIndex(i => i.name === item.name)] = {
-       ...item,
-       selected: !item.selected
-     }
-     console.log(`${item.name} was ${item.selected ? 'de-selected' : 'selected'}`);
-   }
-
-   $: hasSelection = collection_copy.some(i => i.selected)
+   $: hasSelection = $collection.some(i => i.selected)
  </script>
 
   <style>
@@ -54,8 +40,8 @@
  </style>
 
   <table cellspacing=0 class:hasSelection={hasSelection} class=selectable>
-   {#each collection_copy as item}
-     <tr class:selected={item.selected} on:click={() => select(item)}>
+   {#each $collection as item}
+     <tr class:selected={item.selected} on:click={() => collection.select(item)}>
        <td class=icon height=20 width=20></td>
        <td>
          {item.name}
