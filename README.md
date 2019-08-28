@@ -5,7 +5,7 @@ This repository covers learning material for Svelte, but also general web develo
 
 ## Topics
 
-1. Building a Complex Multi-Select w/ Svelte and CSS
+1. [Building a Complex Multi-Select w/ Svelte and CSS](http://blog.testdouble.com/posts/2019-08-27-css-the-visual-state-machine)
 
 ## Prerequisite Installation Instructions:
 
