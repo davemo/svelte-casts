@@ -1,7 +1,10 @@
 <script>
-   export let collection;
+  export let collection;
+  import createSelectableStore from '../stores/selectable.store.js'
 
-   $: hasSelection = $collection.some(i => i.selected)
+  let selectableCollection = createSelectableStore(collection);
+
+  $: hasSelection = $selectableCollection.some(i => i.selected)
  </script>
 
   <style>
@@ -20,7 +23,7 @@
      background-color: yellow;
    }
 
-   .icon, .template-icon {
+   .icon {
      display: flex;
      justify-content: center;
    }
@@ -40,8 +43,8 @@
  </style>
 
   <table cellspacing=0 class:hasSelection={hasSelection} class=selectable>
-   {#each $collection as item}
-     <tr class:selected={item.selected} on:click={() => collection.select(item)}>
+   {#each $selectableCollection as item}
+     <tr class:selected={item.selected} on:click={() => selectableCollection.selectItem(item)}>
        <td class=icon height=20 width=20></td>
        <td>
          {item.name}
